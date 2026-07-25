@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Showroom | Pixel & Tonos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Estilos del Abanico de Historias (9:16) */
+        .fan-container {
+            position: relative;
+            height: 480px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fan-card {
+            position: absolute;
+            width: 230px;
+            height: 410px;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.18);
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            overflow: hidden;
+            border: 3px solid #ffffff;
+            background-color: #0f172a;
+        }
+
+        /* Disposición Inicial en Abanico */
+        .fan-card-1 {
+            transform: translateX(-60px) rotate(-10deg);
+            z-index: 10;
+        }
+
+        .fan-card-2 {
+            transform: translateX(0px) rotate(0deg);
+            z-index: 20;
+        }
+
+        .fan-card-3 {
+            transform: translateX(60px) rotate(10deg);
+            z-index: 30;
+        }
+
+        /* Efecto al pasar el mouse por encima (Mantiene inclinación original, eleva y escala suavemente) */
+        .fan-card-1:hover {
+            z-index: 50 !important;
+            transform: translateX(-60px) translateY(-14px) scale(1.04) rotate(-10deg) !important;
+            box-shadow: 0 25px 35px -10px rgba(14, 165, 233, 0.35);
+            border-color: #0ea5e9;
+        }
+
+        .fan-card-2:hover {
+            z-index: 50 !important;
+            transform: translateX(0px) translateY(-14px) scale(1.04) rotate(0deg) !important;
+            box-shadow: 0 25px 35px -10px rgba(14, 165, 233, 0.35);
+            border-color: #0ea5e9;
+        }
+
+        .fan-card-3:hover {
+            z-index: 50 !important;
+            transform: translateX(60px) translateY(-14px) scale(1.04) rotate(10deg) !important;
+            box-shadow: 0 25px 35px -10px rgba(14, 165, 233, 0.35);
+            border-color: #0ea5e9;
+        }
+
+        /* Suave atenuado opcional de las tarjetas inactivas sin perder nitidez */
+        .fan-container:hover .fan-card:not(:hover) {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Header / Navbar (Limpio en Blanco) -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <span class="text-2xl font-extrabold tracking-tighter text-slate-900">PIXEL<span class="text-sky-500">&</span>TONOS<span class="text-sky-500">.</span></span>
+                <div class="flex gap-4 items-center">
+                    <span class="text-xs uppercase font-bold tracking-widest px-3 py-1.5 rounded-full bg-sky-100 text-sky-700 border border-sky-200">Mini Portfolio</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECCIÓN 1: HERO (Fondo Blanco) -->
+    <section class="pt-32 pb-16 bg-white border-b border-slate-100 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest text-sky-600 uppercase bg-sky-100 rounded-full">
+                Muestra Visual de Resultados Reales
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
+                Así transformamos la imagen de <span class="bg-gradient-to-r from-sky-500 to-indigo-600 gradient-text">tu negocio</span>
+            </h1>
+            <p class="text-slate-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                Una combinación estratégica de interacción diaria en historias, diseño editorial de alto valor visual y video marketing presencial grabado en tu propio local.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: MÓDULO 1 - HISTORIAS QUE CONECTAN (Fondo Blanco) -->
+    <section class="py-20 bg-white border-b border-slate-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Info Estratégica -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-100 text-sky-700 font-bold text-xs uppercase tracking-wider border border-sky-200">
+                        Atención Diaria & Conversión
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">
+                        Historias que <span class="text-sky-600">conectan y venden</span> en el día a día
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Las publicaciones del feed atraen nuevos interesados, pero <strong>las historias cierran las ventas</strong>. Diseñamos secuencias interactivas con cajas de preguntas, encuestas y llamadas a la acción directas al WhatsApp para mantener caliente a tu audiencia.
+                    </p>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Estrategia de preguntas y respuestas para resolver dudas frecuentes.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Ofertas relámpago con enlaces directos de compra a WhatsApp.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Humanización detrás de cámaras de tu equipo o local comercial.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Abanico Interactivo (3 Tarjetas 9:16) -->
+                <div class="fan-container">
+                    <!-- Historia 1 -->
+                    <div class="fan-card fan-card-1">
+                        <img src="https://i.postimg.cc/MH4HKGr0/Chat-GPT-Image-24-jul-2026-12-55-13.png" alt="Ejemplo de Historia Interactiva Pixel&Tonos" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Historia 2 -->
+                    <div class="fan-card fan-card-2">
+                        <img src="https://i.postimg.cc/HnKnsLPs/Chat-GPT-Image-24-jul-2026-12-58-45.png" alt="Ejemplo de Historia Oferta Pixel&Tonos" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Historia 3 -->
+                    <div class="fan-card fan-card-3">
+                        <img src="https://i.postimg.cc/D0D0yzY1/Gemini-Generated-Image-yrgi84yrgi84yrgi.png
+" alt="Ejemplo de Historia Interacción Pixel&Tonos" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: MÓDULO 2 - CARRUSELES ESTRATÉGICOS (Fondo Oscuro) -->
+    <section class="py-20 bg-slate-900 text-white border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="inline-block px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 font-bold text-xs uppercase tracking-wider border border-indigo-500/20">
+                    Autoridad & Valor Visual
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white">
+                    Carruseles de Alto Impacto
+                </h2>
+                <p class="text-slate-300">
+                    No hacemos imágenes estáticas sencillas de plantilla. Diseñamos piezas narrativas que educan a tu cliente, responden sus objeciones y posicionan a tu negocio como la opción profesional Nº 1 de la ciudad.
+                </p>
+            </div>
+
+            <!-- Showroom del Carrusel -->
+            <div class="relative group rounded-3xl overflow-hidden border border-slate-700 bg-slate-950 shadow-2xl">
+                <img src="https://i.postimg.cc/1RLNQCxp/Chat-GPT-Image-24-jul-2026-13-07-14.png" alt="Muestra de Carrusel Estratégico Pixel&Tonos" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-85 pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Diseño Institucional & Educativo</h4>
+                        <p class="text-sm text-slate-300">Pautas visuales claras, tipografía legible y dirección de arte a medida.</p>
+                    </div>
+                  
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: MÓDULO 3 - REELS Y VIDEO MARKETING (Fondo Blanco) -->
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="inline-block px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs uppercase tracking-wider border border-emerald-200">
+                        El Motor de Alcance
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+                        Video Marketing & Reels que <span class="text-emerald-600">detienen el Scroll</span>
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        En <strong>Pixel&Tonos</strong> la calidad no se negocia: nada de videos de stock de internet. Vamos directamente a tu local, dirigimos a tu equipo o personal y creamos Reels dinámicos con ganchos auditivos, música en tendencia y subtítulos profesionales.
+                    </p>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-emerald-700 font-bold text-sm">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <span>Producción Presencial en Sitio</span>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Capturamos los mejores ángulos de tu producto, la experiencia de servicio y la cara humana de la empresa para humanizar la marca.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Muestra de Video / Reel -->
+                <div class="lg:col-span-7">
+                    <div class="relative rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-xl group">
+                        <img src="https://i.postimg.cc/L4qZGdWn/Chat-GPT-Image-24-jul-2026-13-12-08.png" alt="Muestra de Video Marketing Pixel&Tonos" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]">
+                      
+                        
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer (Claro/Neutro) -->
+    <footer class="bg-white py-12 border-t border-slate-200 text-center">
+        <p class="text-sm font-bold text-slate-400 tracking-widest uppercase">Pixel & Tonos | 2026</p>
+        <p class="text-xs text-slate-400 mt-2">Mérida, Venezuela | Cúcuta, Colombia</p>
+    </footer>
+
+</body>
+</html>
