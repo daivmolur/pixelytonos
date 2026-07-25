@@ -1,360 +1,77 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Servicios | Pixel & Tonos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Pixel&Tonos | Presentación</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root { --blue:#2AA7FF; --indigo:#4E5EFF; --dark:#08111f; }
+        html,body { height:100%; font-family:'Plus Jakarta Sans',sans-serif; overflow:hidden; background:#08111f; }
         
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        .gradient-text {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .image-placeholder {
-            background-color: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-weight: 600;
-            text-align: center;
-            box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.3);
+        header { position:fixed; top:0; left:0; right:0; height:70px; display:flex; justify-content:space-between; align-items:center; padding:0 35px; background:rgba(8,17,31,.85); backdrop-filter:blur(20px); border-bottom:1px solid rgba(255,255,255,.08); z-index:999; }
+        .logo { font-size:26px; font-weight:800; letter-spacing:-1px; color:white; }
+        .logo span { color:var(--blue); }
+        nav { display:flex; gap:10px; }
+        
+        nav button { border:none; outline:none; cursor:pointer; padding:12px 20px; border-radius:14px; background:transparent; color:#CBD5E1; font-size:15px; font-weight:700; transition:.25s; }
+        nav button:hover { background:rgba(255,255,255,.08); }
+        nav button.active { background:linear-gradient(135deg,var(--blue),var(--indigo)); color:white; box-shadow:0 10px 25px rgba(42,167,255,.30); }
+        
+        #viewer { position:fixed; top:70px; left:0; width:100%; height:calc(100% - 70px); border:none; background:white; opacity:1; transition:opacity .35s; }
+        #viewer.loading { opacity:.1; }
+        
+        .loader { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:70px; height:70px; border-radius:50%; border:5px solid rgba(255,255,255,.15); border-top:5px solid var(--blue); animation:spin .8s linear infinite; display:none; z-index:2000; }
+        .loader.show { display:block; }
+        
+        @keyframes spin { 100% { transform:translate(-50%,-50%) rotate(360deg); } }
+        
+        @media(max-width:700px){
+            header { padding:0 15px; height:auto; min-height:90px; flex-direction:column; justify-content:center; gap:12px; padding-top:10px; padding-bottom:10px; }
+            .logo { font-size:20px; }
+            nav { width:100%; justify-content:center; flex-wrap:wrap; gap:5px; }
+            nav button { padding:8px 14px; font-size:13px; }
+            #viewer { top:110px; height:calc(100% - 110px); }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased selection:bg-sky-500 selection:text-white">
+<body>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 md:h-20 items-center">
-                <span class="text-xl md:text-2xl font-extrabold tracking-tighter text-slate-900">PIXEL<span class="text-sky-500">&</span>TONOS<span class="text-sky-500">.</span></span>
-                
-                <!-- ENLACES A TUS OTRAS PÁGINAS -->
-                <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                    <a href="luigis-review.html" class="hover:text-sky-500 transition-colors">Luigi's Review</a>
-                    <a href="mini-portfolio.html" class="hover:text-sky-500 transition-colors">Mini Portfolio</a>
-                    <a href="servicios-pt.html" class="hover:text-sky-500 transition-colors">Servicios Ext.</a>
-                </div>
-
-                <a href="#contacto" class="bg-slate-900 hover:bg-sky-600 text-white px-4 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold transition-colors text-xs sm:text-sm">
-                    Agendar Diagnóstico
-                </a>
-            </div>
-        </div>
+<header>
+    <div class="logo">PIXEL<span>&</span>TONOS.</div>
+    <nav>
+        <button class="active" onclick="changePage('./mini-portfolio.html',this)">Portfolio</button>
+        <button onclick="changePage('./servicios-pt.html',this)">Servicios</button>
+        <button onclick="changePage('./luigis-review.html',this)">Diagnóstico</button>
     </nav>
+</header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-28 pb-12 sm:pt-36 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-4xl mx-auto space-y-6 sm:space-y-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-sky-100 text-sky-700 font-bold text-xs sm:text-sm">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-                    </span>
-                    Agencia Especializada en Diseño y Marketing
-                </div>
-                <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.15] sm:leading-[1.1]">
-                    Hacemos que tu marca se vea <span class="bg-gradient-to-r from-sky-500 to-indigo-500 gradient-text">tan bien como tu producto.</span>
-                </h1>
-                <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto px-2 sm:px-0">
-                    Tener redes sociales no es solo publicar fotos bonitas. Es conectar, retener y vender. Transformamos seguidores curiosos en clientes reales mediante video estratégico y embudos de venta.
-                </p>
-            </div>
+<div id="loader" class="loader"></div>
+<iframe id="viewer" src="./mini-portfolio.html"></iframe>
 
-            <!-- Hero Image / Reel Showcase -->
-            <div class="mt-10 sm:mt-16 relative mx-auto max-w-5xl rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-2xl image-placeholder aspect-[1408/768] w-full">
-                <img src="https://i.postimg.cc/tRLVjS0N/Gemini-Generated-Image-jdw7eyjdw7eyjdw7.png" class="w-full h-full object-cover" alt="Detrás de cámaras de grabación profesional en un negocio">
-            </div>
+<script>
+    const viewer = document.getElementById("viewer");
+    const loader = document.getElementById("loader");
 
-        </div>
-    </section>
+    function changePage(page, btn) {
+        document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loader.classList.add("show");
+        viewer.classList.add("loading");
+        
+        setTimeout(() => {
+            viewer.src = page;
+        }, 250);
+    }
 
-    <!-- El Problema / El Dolor -->
-    <section class="py-14 sm:py-20 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                <div class="space-y-6">
-                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                        ¿Subes contenido todos los días, pero tu <span class="text-emerald-400">WhatsApp sigue vacío?</span>
-                    </h2>
-                    <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
-                        El error número uno es creer que Instagram es solo un catálogo digital. Si tu perfil tiene fotos pixeladas, imágenes de internet (stock) o no muestra la cara humana de tu negocio, tu cliente ideal se irá con la competencia en menos de 3 segundos.
-                    </p>
-                    <ul class="space-y-3 sm:space-y-4 mt-6 sm:mt-8 text-sm sm:text-base">
-                        <li class="flex items-start gap-3">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-rose-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="text-slate-300">Falta de estrategia clara y un embudo de ventas.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-rose-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="text-slate-300">Videos aburridos que no retienen la atención.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-rose-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="text-slate-300">No hay identidad ni "rostro" que genere confianza.</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden image-placeholder aspect-[1448/1086] w-full">
-                    <img src="https://i.postimg.cc/c1V8S9qc/Chat-GPT-Image-22-jul-2026-19-34-24.png" alt="Negocio estancado o frustración con redes sociales" class="w-full h-full object-cover">
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- La Solución Pixel&Tonos (Beneficios) -->
-    <section class="py-14 sm:py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 sm:mb-6">El Método <span class="text-sky-500">Pixel&Tonos</span></h2>
-                <p class="text-base sm:text-lg text-slate-600">No publicamos por publicar. Diseñamos un ecosistema digital completo para que tu marca se posicione como la autoridad número uno en tu ciudad.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Beneficio 1 -->
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-shadow">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6">
-                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Videos Reales (Cero Stock)</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Olvídate de fotos aburridas de internet. Vamos a tu negocio, estructuramos guiones ganadores y grabamos contenido real, dinámico y de calidad televisiva para TikTok e Instagram Reels.</p>
-                </div>
-                
-                <!-- Beneficio 2 -->
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-shadow">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6">
-                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Estrategia y Embudos</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Convertimos los "likes" en ventas. Gestionamos los comentarios y mensajes directos para filtrar interesados y enviar prospectos calientes directamente al WhatsApp de tu equipo de ventas.</p>
-                </div>
-
-                <!-- Beneficio 3 -->
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-shadow">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6">
-                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Humanización de Marca</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Las personas le compran a personas. Te ayudamos a darle rostro a tu marca, dirigiendo a tu equipo en cámara o poniendo a disposición a nuestros presentadores para conectar con tu audiencia.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Paquetes y Precios -->
-    <section id="paquetes" class="py-14 sm:py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 sm:mb-6">Planes de Inversión</h2>
-                <p class="text-base sm:text-lg text-slate-600">No compres entregables, invierte en resultados. Cada plan es una estrategia diseñada para resolver problemas reales de tu marca.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                
-                <!-- Paquete 1: Essential -->
-                <div class="glass-card rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-8 relative">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Essential</h3>
-                    <p class="text-sm text-slate-500 mb-6 min-h-[40px]">Presencia profesional y ordenada para marcas que están iniciando y necesitan generar confianza inmediata.</p>
-                    <div class="flex items-baseline gap-1 mb-8">
-                        <span class="text-4xl font-extrabold tracking-tight">$100</span>
-                        <span class="text-slate-500 font-semibold">/mes</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Atracción Inicial de Público:</strong> Video dinámico para romper el hielo y llamar la atención de nuevos clientes <em class="text-slate-500 font-normal">(4 Videos/Reels al mes)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Estructura & Orden Visual:</strong> Piezas informativas diseñadas a medida para comunicar tu oferta sin desorden <em class="text-slate-500 font-normal">(4 Posts/Carruseles)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Interacción Básica Diaria:</strong> Plantillas interactivas para mantener activa la presencia en tus seguidores <em class="text-slate-500 font-normal">(8 Historias)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Captura de Contenido Real:</strong> Producción en tu local para garantizar cero imágenes falsas o de stock <em class="text-slate-500 font-normal">(2 Sesiones de grabación)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Estrategia y calendario mensual para organizar tus publicaciones.</span>
-                        </li>
-                    </ul>
-                    <a href="#contacto" class="block w-full py-3 px-6 text-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold transition-colors">Seleccionar Essential</a>
-                </div>
-
-                <!-- Paquete 2: Crecimiento (DESTACADO) -->
-                <div class="bg-slate-900 text-white rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-8 relative transform md:-translate-y-4 shadow-2xl shadow-sky-900/20 border border-slate-700">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg whitespace-nowrap">
-                        ✨ Más Elegido ✨
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2 mt-4">Crecimiento</h3>
-                    <p class="text-sm text-slate-300 mb-6 min-h-[40px]">El motor de ventas. Diseñado para marcas locales que necesitan aumentar constantemente su flujo de prospectos.</p>
-                    <div class="flex items-baseline gap-1 mb-8">
-                        <span class="text-5xl font-extrabold tracking-tight">$250</span>
-                        <span class="text-slate-400 font-semibold">/mes</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex gap-3 text-sm text-slate-200">
-                            <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Atracción Masiva de Clientes:</strong> Video marketing dinámico para detener el scroll y aumentar el alcance <em class="text-slate-400 font-normal">(8 Reels/TikToks al mes)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-200">
-                            <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Presencia en la Mente del Cliente:</strong> Secuencias estratégicas en historias para calentar la venta <em class="text-slate-400 font-normal">(12 Historias de Venta)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-200">
-                            <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Autoridad & Posicionamiento:</strong> Carruseles estratégicos que educan y posicionan tu negocio como el Nº 1 <em class="text-slate-400 font-normal">(2 Carruseles de valor)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-200">
-                            <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Humanización de Marca:</strong> Producción presencial constante en tu local comercial <em class="text-slate-400 font-normal">(Hasta 4 sesiones)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-200 bg-sky-900/30 p-2.5 rounded-xl border border-sky-500/20">
-                            <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Conversion Funnel (WhatsApp):</strong> Monitoreo diario para tomar comentarios/DMs y llevarlos directo al chat de tu vendedor.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-200 bg-sky-900/30 p-2.5 rounded-xl border border-sky-500/20">
-                            <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Acelerador de Ventas (Meta Ads):</strong> Configuración y monitoreo de publicidad paga para potenciar los mejores videos.</span>
-                        </li>
-                    </ul>
-                    <a href="#contacto" class="block w-full py-3 px-6 text-center rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-sky-400 hover:to-indigo-400 text-white font-bold transition-all shadow-lg shadow-sky-500/30">Impulsar mi Negocio</a>
-                </div>
-
-                <!-- Paquete 3: Premium -->
-                <div class="glass-card rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-8 relative">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Premium</h3>
-                    <p class="text-sm text-slate-500 mb-6 min-h-[40px]">Dominio de mercado "Llave en mano". Cobertura total de contenido, pauta avanzada y liderazgo sectorial.</p>
-                    <div class="flex items-baseline gap-1 mb-8">
-                        <span class="text-4xl font-extrabold tracking-tight">$400</span>
-                        <span class="text-slate-500 font-semibold">/mes</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Saturación Positiva de Contenido:</strong> Producción constante orientada a branding, storytelling y tendencias <em class="text-slate-500 font-normal">(12 Reels/TikToks premium)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Presencia Diaria Ininterrumpida:</strong> Estrategia de historias de Lunes a Viernes para ventas relámpago <em class="text-slate-500 font-normal">(20 Historias de cobertura)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Diseño Editorial de Alto Impacto:</strong> Carruseles complejos con estándares visuales corporativos <em class="text-slate-500 font-normal">(4 Carruseles estratégicos)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Equipo de Producción Dedicado:</strong> Día fijo semanal en tu negocio para capturar lanzamientos y el día a día <em class="text-slate-500 font-normal">(4+ Sesiones presenciales)</em>.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Estrategia Publicitaria Avanzada:</strong> Campañas de conversión y remarketing segmentado en Meta Ads.</span>
-                        </li>
-                        <li class="flex gap-3 text-sm text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span><strong>Consultoría de Ventas & Métricas:</strong> Auditoría mensual para optimizar la atención de tu equipo por WhatsApp.</span>
-                        </li>
-                    </ul>
-                    <a href="#contacto" class="block w-full py-3 px-6 text-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold transition-colors">Contactar Asesor</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Proceso de Trabajo -->
-    <section class="py-14 sm:py-20 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4 sm:mb-6">Un proceso claro y sin estrés</h2>
-                <p class="text-sm sm:text-base text-slate-600">Nuestro compromiso es cuidar tu tiempo. Establecemos reglas claras para que el trabajo fluya y los resultados lleguen rápido.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center space-y-3 sm:space-y-4">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto bg-slate-100 text-slate-900 rounded-full flex items-center justify-center font-extrabold text-xl sm:text-2xl">1</div>
-                    <h4 class="font-bold text-base sm:text-lg">Briefing Inicial</h4>
-                    <p class="text-xs sm:text-sm text-slate-500">Nos reunimos para entender la esencia de tu negocio, tus metas y cómo atender a tu público ideal.</p>
-                </div>
-                <div class="text-center space-y-3 sm:space-y-4">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto bg-slate-100 text-slate-900 rounded-full flex items-center justify-center font-extrabold text-xl sm:text-2xl">2</div>
-                    <h4 class="font-bold text-base sm:text-lg">Programación Semanal</h4>
-                    <p class="text-xs sm:text-sm text-slate-500">Te enviamos las ideas, guiones y diseños para tu aprobación previa. Sin sorpresas.</p>
-                </div>
-                <div class="text-center space-y-3 sm:space-y-4">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center font-extrabold text-xl sm:text-2xl shadow-lg shadow-sky-100">3</div>
-                    <h4 class="font-bold text-base sm:text-lg">Producción en Sitio</h4>
-                    <p class="text-xs sm:text-sm text-slate-500">Vamos a tu negocio, dirigimos la grabación y capturamos material visual de primer nivel.</p>
-                </div>
-                <div class="text-center space-y-3 sm:space-y-4">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto bg-slate-100 text-slate-900 rounded-full flex items-center justify-center font-extrabold text-xl sm:text-2xl">4</div>
-                    <h4 class="font-bold text-base sm:text-lg">Edición y Resultados</h4>
-                    <p class="text-xs sm:text-sm text-slate-500">Editamos el material y lo lanzamos. (Máximo 2 ajustes por pieza terminada para asegurar fluidez).</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action (Diagnóstico Express) -->
-    <section id="contacto" class="py-16 sm:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-            <div class="absolute -top-24 -right-24 w-72 sm:w-96 h-72 sm:h-96 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
-            <div class="absolute top-1/2 -left-24 w-60 sm:w-72 h-60 sm:h-72 bg-rose-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
-        </div>
-
-        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10 space-y-6 sm:space-y-8">
-            <span class="px-3.5 py-1.5 rounded-full bg-white/10 text-white font-semibold text-xs sm:text-sm border border-white/20 tracking-wider">ESTUDIO DE MERCADO LIMITADO</span>
-            <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
-                Descubre los 3 errores que están alejando a tus clientes hoy.
-            </h2>
-            <p class="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto">
-                No contrates nada aún. Permítenos regalarte un <strong>Diagnóstico Express de 5 Minutos</strong> de tu cuenta de Instagram. Te diremos exactamente qué falla y cómo solucionarlo, 100% gratis.
-            </p>
-            <div class="pt-4 sm:pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#" class="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-white text-slate-900 font-extrabold rounded-full hover:bg-sky-50 transition-colors shadow-xl shadow-white/10 flex items-center justify-center gap-2 text-sm sm:text-base">
-                    <svg class="w-5 h-5 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    Escribir por WhatsApp
-                </a>
-                <a href="#paquetes" class="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-transparent border border-slate-500 text-white font-bold rounded-full hover:bg-slate-800 transition-colors text-sm sm:text-base">
-                    Ver Paquetes Nuevamente
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 py-10 sm:py-12 text-center border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4">
-            <span class="text-xl font-extrabold tracking-tighter text-white opacity-50">PIXEL<span class="text-sky-500">&</span>TONOS.</span>
-            <p class="text-slate-500 text-xs sm:text-sm mt-3 sm:mt-4">Impulsando marcas locales en Mérida y Cúcuta.</p>
-            <p class="text-slate-600 text-xs mt-6 sm:mt-8">&copy; 2026 Pixel&Tonos. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    viewer.onload = function() {
+        loader.classList.remove("show");
+        viewer.classList.remove("loading");
+    }
+</script>
 
 </body>
 </html>
